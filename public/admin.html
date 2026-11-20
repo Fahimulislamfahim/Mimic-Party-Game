@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mimic Party - Admin</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main class="page">
+  <h1>Admin <span>sounds</span></h1>
+  <p class="sub">Each sound needs a meme image. Players see the image while the sound plays.</p>
+
+  <div class="card" id="login">
+    <label for="pw">Admin password</label>
+    <input id="pw" type="password" autocomplete="current-password">
+    <div class="gap"></div>
+    <button id="loginBtn">Sign in</button>
+    <div class="err" id="loginErr"></div>
+  </div>
+
+  <div id="panel" hidden>
+    <form class="card" id="form">
+      <h2>Add a sound</h2>
+      <label for="sname">Name (shown to players)</label>
+      <input id="sname" maxlength="40" required placeholder="e.g. Vine boom">
+      <div class="gap"></div>
+      <label for="saudio">Sound file (mp3, wav, ogg, m4a - up to 20 seconds)</label>
+      <input id="saudio" type="file" accept="audio/*" required>
+      <div class="note" id="durInfo"></div>
+      <div class="gap"></div>
+      <label for="simage">Meme image (png, jpg, webp, gif)</label>
+      <input id="simage" type="file" accept="image/png,image/jpeg,image/webp,image/gif" required>
+      <img id="preview" class="meme" alt="" hidden style="width:96px;height:96px">
+      <div class="gap"></div>
+      <button id="addBtn" type="submit">Add sound</button>
+      <div class="err" id="formErr"></div>
+    </form>
+
+    <h2>Library <span class="note" id="total"></span></h2>
+    <div class="list" id="list"></div>
+    <p class="note"><a href="/" style="color:var(--accent-2)">Back to the game</a></p>
+  </div>
+</main>
+<script src="/admin.js"></script>
+</body>
+</html>

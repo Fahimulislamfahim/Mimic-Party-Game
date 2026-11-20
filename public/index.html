@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Mimic Party 3D</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<!-- Fullscreen 3D Stage Canvas -->
+<div id="stage3d"></div>
+
+<!-- Top Player Avatar Cards (Exact match to video) -->
+<header id="topBar" class="top-bar" hidden>
+  <div id="playerCards" class="player-cards"></div>
+</header>
+
+<!-- Main Game UI Overlay -->
+<main id="app">
+
+  <!-- Home / Join View -->
+  <section id="home" class="view">
+    <div class="brand">
+      <h1>MIMIC <span>PARTY</span></h1>
+      <p class="tagline">3D Voice-Mimic Party Game</p>
+    </div>
+    <div class="card home-card">
+      <label for="name">Your Name</label>
+      <input id="name" maxlength="14" autocomplete="off" placeholder="e.g. Ankmay" autofocus>
+      <div class="gap"></div>
+      <button id="create" class="btn-primary">Create Party Room</button>
+      <div class="or-divider"><span>OR JOIN WITH CODE</span></div>
+      <div class="row">
+        <input id="code" class="code-in" maxlength="4" placeholder="CODE" autocomplete="off">
+        <button id="join" class="btn-secondary">Join</button>
+      </div>
+      <div class="err" id="homeErr"></div>
+    </div>
+    <p class="note info-note">🎤 Microphone is required to mimic sounds. Headphones recommended so demo audio doesn't loop back!</p>
+  </section>
+
+  <!-- Lobby View -->
+  <section id="lobby" class="view" hidden>
+    <div class="card lobby-code-card">
+      <div class="label-tiny">ROOM CODE</div>
+      <div class="roomcode" id="roomCode">----</div>
+      <div class="sub-tiny">Share this 4-letter code with friends!</div>
+    </div>
+
+    <div class="card lobby-players-card">
+      <div class="lobby-players-header">
+        <h2>Stage Roster <span class="badge" id="count">1/8</span></h2>
+      </div>
+      <ul class="players" id="players"></ul>
+    </div>
+
+    <div id="hostBox" class="card host-controls" hidden>
+      <div class="host-bot-row">
+        <button id="addBot" class="btn-bot">+ Add Bot Player</button>
+        <button id="remBot" class="btn-bot alt">- Remove Bot</button>
+      </div>
+      <div class="gap"></div>
+      <div class="rounds-row">
+        <label for="rounds">Rounds:</label>
+        <select id="rounds">
+          <option value="3">3 Rounds</option>
+          <option value="5" selected>5 Rounds</option>
+          <option value="8">8 Rounds</option>
+        </select>
+      </div>
+      <div class="gap"></div>
+      <button id="start" class="btn-start">Start Game 🚀</button>
+    </div>
+
+    <p class="note" id="waitHost" hidden>Waiting for host to start the game...</p>
+    <p class="note" id="micNote"></p>
+    <div class="err" id="lobbyErr"></div>
+  </section>
+
+  <!-- Active In-Game Stage HUD -->
+  <section id="play" class="view in-game-hud" hidden>
+    <!-- Center Meme Display during Listen -->
+    <div id="memeBox" class="meme-box" hidden>
+      <div class="meme-frame">
+        <img class="meme-img" id="meme" alt="">
+      </div>
+      <div class="sound-meta">
+        <span class="sound-title" id="soundName"></span>
+      </div>
+    </div>
+
+    <!-- Active Performer Pointer -->
+    <div id="performerPointer" class="performer-pointer" hidden>
+      <span id="performerName">Performer</span>
+      <div class="arrow-down">▼</div>
+    </div>
+
+    <!-- Stage 3D Big Score Popup (Reveals during score phase) -->
+    <div id="stageScoreBanner" class="stage-score-banner" hidden>
+      <div class="big-score" id="bannerScore">93 / 100</div>
+      <div class="bonus-tag" id="bannerBonus" hidden>Bonus: +10</div>
+    </div>
+
+    <!-- Bottom Waveform Bar & Subtitle -->
+    <div class="bottom-hud">
+      <div class="wave-container">
+        <canvas id="wave"></canvas>
+        <div id="statusOverlay" class="status-overlay"></div>
+      </div>
+      <div class="subtitle-text" id="subtitle">Listen carefully to the demo</div>
+      <div class="meter-bar"><i id="level"></i></div>
+    </div>
+  </section>
+
+  <!-- Final Podium / Game Over -->
+  <section id="final" class="view" hidden>
+    <div class="card final-card">
+      <div class="trophy-icon">🏆</div>
+      <h1 class="game-over-title">GAME OVER</h1>
+      <div class="podium-winner" id="podium">Winner: Ankmay</div>
+      <div class="final-roster" id="finalList"></div>
+      <div class="gap"></div>
+      <button id="again" class="btn-primary" hidden>Play Again 🔄</button>
+      <p class="note" id="waitAgain" hidden>Waiting for host to restart...</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="/score.js"></script>
+<script type="module" src="/app.js"></script>
+</body>
+</html>
